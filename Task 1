@@ -1,1 +1,384 @@
+TASK-1:
+------------------
+1a. Write a C program to convert days into years, weeks and days.(Assume a year has 365 days)
+
+Test Cases:
+----------------------
+Case=t1
+Input=1329
+Output=
+Years: 3                                                                        
+Weeks: 33                                                                       
+Days: 3
+
+Case=t2
+Input=365
+Output=
+Years: 1                                                                        
+Weeks: 0                                                                       
+Days: 0
+
+Case=t3
+Input= 730
+Output=
+Years: 2                                                                        
+Weeks: 0                                                                       
+Days: 0
+
+
+PROGRAM:
+---------------------------
+#include <stdio.h> 
+int main()
+{
+    int days, years, weeks;
+ //printf("Enter number of days:");
+ scanf("%d",&days);
+     // Converts days to years, weeks and days
+    years = days/365; 
+    weeks = (days % 365)/7;
+    days = days- ((years*365) + (weeks*7));
+    printf("Years: %d\n", years);
+    printf("Weeks: %d\n", weeks);
+    printf("Days: %d \n", days);
+    return 0;
+}
+
+
+1b. Write a C program to find greatest and smallest among three numbers using conditional operator. 
+
+Test cases:
+-------------------
+Case=t1
+Input=30 10 20
+Output=
+Min=10                                                                          
+Max=30 
+
+Case=t2
+Input=50 10 5
+Output=
+Min=5                                                                          
+Max=50 
+
+Case=t3
+Input=100 150 200
+Output=
+Min=100                                                                          
+Max=200 
+
+Case=t4
+Input=350 200 500
+Output=
+Min=200                                                                          
+Max=500
+
+
+PROGRAM:
+-----------------------
+#include<stdio.h>
+int main()
+{
+int a,b,c,max,min;
+printf("Enter values of a,b,c:");
+scanf("%d%d%d",&a,&b,&c);
+     
+min=(a<b)? (a<c)?a:c : b<c?b:c;
+
+printf("Min=%d\n",min);
+
+max=(a>b)?(a>c?a:c) :(b>c?b:c);
+
+printf("Max=%d",max);
+return 0;
+}
+
+
+1c. Write a C program to enter P, T, R and calculate Compound Interest. 
+//note enter  P T R value in that order.
+
+Test cases:
+----------------------------------
+Case=t1
+Input= 1200 2 5.4
+Output=
+Compound Interest = 1333.10
+
+Case=t2
+Input=1000 2 4.5
+Output=
+Compound Interest = 1092.02
+
+Case=t3
+Input=10000 3 12.65
+Output=
+Compound Interest = 14295.31
+
+PROGRAM:
+-----------------------------
+#include <stdio.h>
+#include <math.h>
+
+int main()
+{
+    float p,r,t,CI;
+    /* Input principle, time and rate */
+    printf("Enter principle,time,rate: ");
+    scanf("%f%f%f",&p,&t,&r);
+    /* Calculate compound interest */
+    CI = p* (pow((1 + r/100),t));
+    /* Print the resultant CI */
+    printf("Compound Interest = %.2f", CI);
+    return 0;
+}
+
+TASK-2:
+-------------------------
+2a. Write a C program to swap two numbers using the following
+
+Test cases:
+--------------------
+Case=t1
+Input=10 20
+Output=
+10 20
+20 10
+
+Case=t2
+Input=30 50
+Output=
+30 50
+50 30
+
+Case=t3
+Input=60 80
+Output=
+
+60 80
+80 60
+
+
+PROGRAM:
+-----------------------
+#include<stdio.h>
+int main() 
+{
+  int first, second, temp;
+  printf("Enter first and second numbers: ");
+  scanf("%d%d",&first,&second);
+  printf("%d %d\n", first,second);
+    // value of first is assigned to temp
+  temp = first;
+  // value of second is assigned to first
+  first = second;
+  // value of temp (initial value of first) is assigned to second
+  second = temp;
+  printf("%d %d", first,second);
+  return 0;
+}
+
+2aii. Write a C program to swap two numbers with out using third variable
+
+TEST CASES:
+------------------------
+Case=t1
+Input=10 20
+Output=
+
+10 20
+20 10
+
+Case=t2
+Input=30 50
+Output=
+
+30 50
+50 30
+
+Case=t3
+Input=60 80
+Output=
+
+60 80
+80 60
+
+
+PROGRAM:
+-----------------------------
+#include<stdio.h>
+int main()
+{
+int a,b;
+printf("Enter first and second numbers:");
+scanf("%d%d",&a,&b);
+printf("%d %d\n",a,b);
+a=a+b;
+b=a-b;
+a=a-b;
+printf("%d %d",a,b);
+return 0;
+}
+
+2aiii. Write a c program to swap two numbers using Bitwise Operators
+
+Test Cases:
+-------------------------
+Case=t1
+Input= 10 20
+Output=
+                                      
+10 20                                                                           
+20 10
+
+Case=t2
+Input=30 50
+Output=
+
+30 50
+50 30
+
+Case=t3
+Input=60 80
+Output=
+
+60 80
+80 60
+
+PROGRAM:
+-----------------------
+#include<stdio.h>
+int main()
+{
+     int a, b;
+     printf("Enter first and second numbers  : ");
+     scanf("%d%d", &a,&b);
+     printf("%d %d\n", a, b);
+     /* Swap Variables Using Bitwise Operator */
+     a = a ^ b;
+     b = a ^ b;
+     a = a ^ b;
+     printf("%d %d", a, b);
+     return(0);
+}
+
+2bi.Write a C program to perform implicit and explicit type conversion 
+TEST CASES:
+-------------------------
+Case=t1
+Input= 10
+Output=
+Enter temperature in celsius:
+10 Celsius = 50.00 Fahrenheit
+
+Case=t2
+Input= 20
+Output=
+Enter temperature in Celsius:                                                
+20 Celsius = 68.00 Fahrenheit
+
+Case=t3
+Input=15
+Output=
+Enter temperature in Celsius: 
+15 Celsius = 59.00 Fahrenheit
+
+
+PROGRAM:
+----------------------------
+#include <stdio.h>
+int main()
+{
+    int celsius;
+    float fahrenheit;
+    printf("Enter temperature in Celsius: ");
+    scanf("%d", &celsius);
+    //celsius to fahrenheit conversion formula
+    
+    fahrenheit = (celsius * 9 / 5) + 32; //implicit convert int to float
+
+    printf("%d Celsius = %.2f Fahrenheit", celsius, fahrenheit);
+    return 0;
+}
+
+
+2bii. Write a C program using implicit and explicit type conversion Convert Fahrenheit temperature to Celsius   
+
+TEST CASES:
+-------------------
+Case=t1
+Input=34.5
+Output=
+celsius: 1  
+
+Case=t2
+Input=25.456
+Output=
+celsius: -3
+
+Case=t3
+Input=19.14523
+Output=
+celsius: -7
+
+case=t4
+input=56.54
+output=
+celsius: 13
+
+PROGRAM:
+------------------------------
+#include<stdio.h>
+int main()
+{
+   int celsius;
+   float fahrenheit;
+   //printf("Enter Fahrenheit:");
+   scanf("%f",&fahrenheit);
+   celsius = (int)((fahrenheit - 32)*5/9); //Explicit conversion
+   printf("celsius: %d", celsius);
+   return 0;
+}
+
+2biii. write c program to use implicit and explicit conversion to Find area of a triangle given sides a,b,c 
+
+Note: s= (a+b+c)/2 , sqrt(s*(s-a)*(s-b)*(s-c)) 
+Test cases:
+------------------------
+Case=t1
+Input=12 10 8
+Output=
+area of triangle:39.686270
+
+Case=t2
+Input=10 5 6 
+Output=
+area of triangle:11.399013
+
+Case=t3
+Input= 5 9 6 
+Output=
+area of triangle:14.142136
+
+
+PROGRAM:
+------------------------------
+#include<stdio.h> 
+#include<math.h> 
+int main() 
+{      
+    float a, b,c,s;      
+    double area;     
+    printf("Enter three sides of triangle:");     
+    scanf("%f%f%f",&a,&b,&c);     
+    s = (a+b+c)/2; 
+    //printf("S=%f",s);      
+    //Calculate area of triangle     
+    
+    area = sqrt(s*(s-a)*(s-b)*(s-c)); // implicit conversion     
+ 
+    //Area with 2 digits of precision     
+    printf("area of triangle:%lf",area);      
+    return 0; 
+    
+}
 
