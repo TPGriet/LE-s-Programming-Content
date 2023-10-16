@@ -1,1 +1,806 @@
+TASK-12:
+------------------------
+12a. Write a C program to implement function pointer to find sum and product of two numbers.
+Input Format: Read the input 
+Output Format :Sum of numbers ,product of two numbers.
+
+Test Cases:
+--------------------
+case = t1
+input= 15
+5
+output=20
+75
+
+case = t2
+input= 5
+5
+output=10
+25
+
+case = t3
+input= -5
+2
+output=-3
+-10
+
+case = t4
+input= 10
+20
+output=30
+200
+
+PROGRAM:
+--------------------------
+#include <stdio.h>  
+int add(int,int);  
+int prod(int,int);
+int main()  
+{  
+   int a,b;  
+   int (*ip)(int,int);  
+   int result;  
+  // printf("Enter the values of a and b : ");  
+   scanf("%d %d",&a,&b);  
+   ip=add;    //assigning function pointer to add function 
+   result=(*ip)(a,b);  
+   printf("Value after addition is : %d\n",result);  
+       ip=prod;    //assigning function pointer to prod function 
+   result=(*ip)(a,b);  
+   printf("Value after multiplication is : %d\n",result); 
+    return 0;  
+}  
+int add(int a,int b)  
+{  
+    int c=a+b;  
+    return c;  
+}  
+int prod(int a,int b)  
+{  
+    int c=a*b;  
+
+    return c;  
+}
+
+12b.Write a C program to sort list of numbers uing pointers.
+
+Input Format: Read the length "n" of the list and then read n number of integers.
+Output Format :print sorted list of numbers separated by spaces.
+
+Test Cases :
+------------------------
+case = t1
+Input= 6
+5
+2
+4
+6
+3
+1
+output = 1 2 3 4 5 6
+
+case = t2
+Input= 10
+20
+10
+40
+15
+12
+5
+6
+13
+8
+4
+output = 4 5 6 8 10 12 13 15 20 40
+
+case= t3
+Input= 5
+-4
+-3
+2
+4
+1
+output = -4 -3 1 2 4
+
+PROGRAM:
+----------------------------
+#include<stdio.h>
+void sort(int *a,int);
+void display(int *a,int n);
+void main()
+{
+int i,n,a[20];
+//printf("Enter size of the Array: ");
+scanf("%d",&n);
+//printf("\nEnter %d elements:\n",n);
+for(i=0 ; i<n ; i++)
+scanf("%d",&a[i]);
+sort(a,n);
+display(a,n);
+}
+// function for sorting
+void sort(int *a, int n)
+{
+int i,j,temp;
+for(i=0;i<n-1;i++)
+{
+for(j=0;j<n-i-1;j++)
+{
+if(*(a+j)>*(a+j+1))
+{
+temp=*(a+j);
+*(a+j)=*(a+j+1);
+*(a+j+1)=temp;
+}
+}
+}
+}
+//function for display
+void display(int *a,int n)
+{
+int i;
+for(i=0 ; i<n ; i++)
+printf(" \t %d",*(a+i));
+printf("\n");
+}
+
+
+TASK-13:
+---------------------
+13a. Define a structure Student, to store the following data about a student: rollno(int),
+name(string) and marks. Suppose that the class has ‘n’ students. Use array of type Student
+and create a function to read the students data into the array. Your program should be
+menu driven that contains the following options :
+(i) Print all student details
+(ii) Search student by rollno
+⦁ Print the names of the students having the highest test score
+
+Test Cases :
+Case = t1
+input = 1
+ARUN   101 55.5
+AJITH  102 65.5
+AKSHAY 103 80.5
+2
+5
+output=
+Name	RollNo	    Marks	
+ARUN	101	    55.50	
+AJITH	102	    65.50	
+AKSHAY	103	    80.50	
+
+Case = t2
+input = 1
+ARUN   101 55.5
+AJITH  102 65.5
+AKSHAY 103 80.5
+2
+3 103
+4
+5
+output=
+Name	RollNo	Marks	
+ARUN	101	    55.50	
+AJITH	102	    65.50	
+AKSHAY	103	    80.50	
+student data with rollno 103 found. Name AKSHAY and marks 80.50
+AKSHAY got maximum marks
+
+
+Case = t3
+input = 1
+ARUN   101 55.5
+AJITH  102 65.5
+AKSHAY 103 80.5
+2
+3 455
+4
+5
+output=
+Name	RollNo	Marks	
+ARUN	101	    55.50	
+AJITH	102	    65.50	
+AKSHAY	103	    80.50	
+Student data not found
+AKSHAY got maximum marks
+
+PROGRAM:
+----------------------------
+#include <stdio.h>
+#include<stdlib.h>
+#define MAX 3
+
+void create();
+void display();
+void search(int);
+void highestscore();
+
+struct student 
+{
+    char name[30];
+    int rollno;
+    float marks;
+};
+
+struct student s[MAX];
+
+int main()
+{
+    int ch,rollno;
+    while(1)
+    {
+       // printf("\n**MENU DRIVEN STUDENT DATA MANAGEMENT USING STRUCTURES***\n");
+        //printf("\n1.Create\n2.Display\n3.Search\n4.Find Highest Score\n5.exit\n");
+       // printf("enter your choice:");
+       scanf("%d",&ch);
+    switch(ch)
+    {
+        case 1:create();
+        break;
+        case 2:display();
+        break;
+        case 3://printf("enter the roll number of student to search:");
+           scanf("%d",&rollno);
+           search(rollno);
+        break;
+        case 4:highestscore();
+        break;
+        case 5:exit(0);
+        default:printf("invalid choice");
+    }
+    }
+    return 0;
+}
+void create()
+{
+     int i;
+       //printf("Enter name, rollno and marks: \n");
+        for(i=0; i<MAX; i++)
+        {
+            //printf("enter student %d details:\n",i+1);
+            scanf("%s%d%f",s[i].name,&s[i].rollno,&s[i].marks);
+        }
+}
+
+void display()
+    {
+        int i;
+         printf("\n\tName\tRollNo\tMarks\t\n");
+        for(i=0; i<MAX; i++)
+        printf("\t%s\t%d\t%.2f\t\n", s[i].name, s[i].rollno,s[i].marks);
+    }
+    
+    
+void search(int roll)
+    {
+        int i,flag=0;
+         for (i=0; i<MAX; i++)
+    {
+        if(roll==s[i].rollno)
+        {
+		  flag=1;
+		  printf("student data with rollno %d found. Name %s and marks %0.2f",s[i].rollno,s[i].name,s[i].marks);
+		  break;
+        }
+    }
+    if (flag==0)
+    {
+	printf("Student data not found");
+    }
+    }
+    
+    void highestscore()
+    {
+         int i,maxindex;
+         float max=0;
+        for (i = 0; i < MAX; i++)
+        {
+			if (max < s[i].marks)
+			{
+				max = s[i].marks;
+				maxindex=i;
+			}
+		}
+		printf("\n%s got maximum marks",s[maxindex].name);
+    }
+   
+
+13b.Write a C program that uses structures and functions to perform the following operations:
+i. Addition of two complex numbers
+ii. subtraction of two complex numbers
+iii. Multiplication of two complex numbers
+
+Input Format: Read complex number c1 in first line (real and imaginary values)
+read complex number c2 in second line.
+Output Format: Display complex number C1 in first line.
+Display complex number C2 in second line.
+Display Sum, Difference and Product of Complex numbers C1 and C2 separated by new line.
+
+Test Cases :
+------------------------
+Case = t1
+Input = 
+2 3                                                                             
+4 5     
+
+output=
+Complex Number C1:                                                              
+2.00 + i 3.00                                                                   
+Complex Number C2:                                                              
+4.00 + i 5.00                                                                   
+                                                                                
+Sum of Complex Numbers C1 and C2:                                               
+6.00 + i 8.00                                                                   
+                                                                                
+Difference of Complex Numbers C1 and C2:                                        
+-2.00 - i 2.00                                                                  
+                                                                                
+Product of Complex Numbers C1 and C2:                                           
+-7.00 + i 22.00  
+   
+case= t2
+Input =
+4 6
+7 8
+
+output=
+ Complex Number c1:
+ 4.00 + i 6.00
+
+ Complex Number c2:
+ 7.00 + i 8.00
+
+ Sum of Complex Numbers C1 and C2: 
+ 11.00 + i 14.00
+
+ Difference of Complex Numbers C1 and C2:  
+ -3.00 - i 2.00
+
+ Product of Complex Numbers C1 and C2:  
+ -20.00 + i 74.00
+
+case= t3
+Input =
+1 3
+4 5
+
+output=
+ Complex Number c1:
+ 1.00 + i 3.00
+
+ Complex Number c2:
+ 4.00 + i 5.00
+
+ Sum of Complex Numbers C1 and C2: 
+ 5.00 + i 8.00
+
+ Difference of Complex Numbers C1 and C2:  
+ -3.00 - i 2.00
+
+ Product of Complex Numbers C1 and C2:  
+ -11.00 + i 17.00
+
+
+case= t4
+Input =
+5 6
+2 4
+
+output= 
+ Complex Number c1:
+ 5.00 + i 6.00
+
+ Complex Number c2:
+ 2.00 + i 4.00
+
+ Sum of Complex Numbers C1 and C2: 
+ 7.00 + i 10.00
+
+ Difference of Complex Numbers C1 and C2:  
+ 3.00 + i 2.00
+
+ Product of Complex Numbers C1 and C2:  
+ -14.00 + i 32.00
+
+PROGRAM:
+-----------------------------
+#include<stdio.h>
+typedef struct
+{
+float rel;
+float img;
+}complex;
+complex add(complex c1,complex c2);
+complex subtract(complex c1,complex c2);
+complex multiply(complex c1,complex c2);
+void display(complex c);
+void read(complex *c);
+int main()
+{
+int i;
+complex c1,c2,res;
+//printf ("Enter Complex number 1: ");
+read(&c1);
+//printf ("Enter Complex number 2: ");
+read(&c2);
+printf("\n Complex Number c1:");
+display(c1);
+printf("\n Complex Number c2:");
+display(c2);
+res=add(c1,c2);
+printf("\n Sum of Complex Numbers C1 and C2: ");
+display(res);
+res=subtract(c1,c2);
+printf("\n Difference of Complex Numbers C1 and C2:  ");
+display(res);
+res=multiply(c1,c2);
+printf("\n Product of Complex Numbers C1 and C2:  ");
+display(res);
+return 0;
+}
+complex add(complex c1,complex c2)
+{
+complex c;
+c.rel=c1.rel+c2.rel;
+c.img=c1.img+c2.img;
+return(c);
+}
+complex subtract(complex c1,complex c2)
+{
+complex c;
+c.rel=c1.rel-c2.rel;
+c.img=c1.img-c2.img;
+return(c);
+}
+complex multiply(complex c1,complex c2)
+{
+complex c;
+c.rel=c1.rel*c2.rel- c1.img*c2.img;
+c.img=c1.rel*c2.img+c1.img*c2.rel;
+return(c);
+}
+void display(complex c)
+{
+if(c.img<0)
+printf("\n %.2f - i %.2f\n",c.rel,-c.img);
+else
+printf("\n %.2f + i %.2f\n",c.rel,c.img);
+}
+void read(complex *c)
+{
+//printf("\n Enter real part and imaginary part of complex number :");
+scanf("%f %f",&c->rel,&c->img);
+}
+
+TASK-14:
+-----------------------
+14a.)Write a C program to merge two files into a third file.
+Input Format: read two input files a.txt and b.txt
+Output Format :merge the content of 2 files
+Note: file1.txt and file2.txt are predefined. Students need not enter any input..
+
+Test Cases :
+-----------------------------
+case = t1
+output=The contents of merged file are:                                                
+Welcome to GRIETThis is PPS Lab  
+
+-----------------------------
+#include<stdio.h>
+#include<stdlib.h>
+void main( )
+{
+FILE *f1,*f2,*f3;
+char ch;
+/*f1=fopen("file1.txt","w");
+printf("Enter text into file1:\n");
+while((ch=getchar())!='#')
+putc(ch,f1);
+fclose(f1);
+f2=fopen("file2.txt","w");
+printf("\nEnter text into file2:\n");
+while((ch=getchar())!='#')
+putc(ch,f2);
+fclose(f2);*/
+
+f1=fopen("file1.txt","r");
+if(f1==NULL)
+{
+    printf("\ncannot open, file does not exist");
+   exit(1);
+}
+f3=fopen("merge.txt","w");
+while((ch=getc(f1))!=EOF)
+putc(ch,f3);
+fclose(f1);
+f2=fopen("file2.txt","r");
+while((ch=getc(f2))!=EOF)
+{
+putc(ch,f3);
+}
+fclose(f3);
+fclose(f2);
+printf("The contents of merged file are:\n");
+f3=fopen("merge.txt","r");
+while((ch=getc(f3))!=EOF)
+putchar(ch);
+fclose(f3);
+}
+
+14b.Write a C program to count number of characters in a file and also convert all lower case
+characters to upper case and display it
+
+Note: file1.txt is predefined in input and use the same file in program. Students need not enter any input..
+
+Test Cases :
+-------------------
+case = t1
+input= file1.txt
+output=WELCOME TO GRIET
+Number of characters = 16
+
+PROGRAM:
+-------------------------------
+#include<stdio.h>
+#include<stdlib.h>
+#include<ctype.h>
+
+int main()
+{
+    FILE *fptr;
+    char ch;
+    int count=0;
+    fptr = fopen("file1.txt","r");
+    if(fptr==NULL)
+    {
+        printf("File does not exists\n");
+        exit(1);
+    }
+    while((ch=fgetc(fptr))!=EOF)
+    {
+        putchar(toupper(ch));
+        count++;
+    }
+    fclose(fptr);
+    printf("\nNumber of characters = %d",count);
+    return 0;
+}
+
+14c. Write a C program to append a file and display it
+
+Note: file1.txt is predefined with the content "Welcome to GRIET"
+Test Cases :
+-----------------------------
+case = t1
+input=file1.txt
+output=Appended file content:                                                
+Welcome to GRIETThis is PPS Lab  
+
+PROGRAM:
+------------------------
+#include<stdio.h>  
+int main()
+{  
+  FILE *fp; 
+  char ch;
+ /* fp = fopen("file1.txt","w");  
+  while((ch=getchar())!='@')
+  {
+     putc(ch,fp);
+  }
+   fclose(fp); */
+   
+   fp = fopen("file1.txt", "a+");
+   fprintf(fp, "%s", "This is PPS Lab");
+   
+   rewind(fp);
+   
+   printf("Appended file content:\n");
+   while ((ch = fgetc(fp) )!= EOF)
+   {
+      printf ("%c", ch);    
+   }
+   fclose(fp);
+   return 0;
+}
+
+
+TASK-15:
+-----------------------------
+15a. Write a C program to find some of n numbers using command line arguments.
+
+Input Format: Read the input from command line arguments
+Output Format :Sum of numbers given from the command line.
+
+Test Cases :
+--------------------
+Case = t1
+Program arguments=10 20 30
+output=10 20 30
+60
+
+Case = t2
+Program arguments=10 20 30 40 
+output=10 20 30 40 
+100
+ 
+Case = t1
+Program arguments=10 -20 30 -40
+output=10 -20 30 -40
+-20
+
+PROGRAM:
+------------------------------
+#include <stdio.h>
+#include<stdlib.h>
+int main(int argc,char *argv[])
+{
+int i=1,sum=0;
+for(i=1;i<argc;i++)
+{
+sum+=atoi(argv[i]);          //sum+=*argv[i];
+printf("%s ",argv[i]);
+}
+printf("\nSUM = %d ",sum);
+return 0;
+}
+
+15Bi. Write a c program to implement pre-processor define
+#define pi 3.14
+
+Input Format: Read radius value of circle
+Output Format :Area of circle
+
+Test Cases :
+--------------------------
+Case = t1
+input=7
+output=Area of Circle=153.860001
+ 
+Case = t2   
+input=34
+output=Area of Circle=3629.840088
+ 
+PROGRAM:
+----------------------------------
+#include <stdio.h>
+#define PI 3.14
+int main()
+{
+int R;
+float ar;
+//printf("\n Enter radius r :");
+scanf("%d",&R);
+ar=PI*R*R;
+printf("Area of Circle=%f",ar);
+return 0;
+}
+
+15Bii.Write a c program to implement pre-processor ifdef
+Note: use macro name as GRIET and assign the value 500
+
+Input Format: no input
+Output Format :print the macro value if it is defined.
+
+Test Cases :
+---------------------------
+case = t1
+input=
+output=
+USING #DEFINE
+X = 10 AND SUM = 20
+USING #UNDEF and again defining X as 20
+X = 20 AND SUM = 30
+                  
+PROGRAM:
+--------------------------------
+#include <stdio.h>
+#define X 10
+ int main()
+{
+	int sum;
+	printf("USING #DEFINE");
+	sum=X+10;
+	printf("\nX = %d AND SUM = %d",X,sum);
+	sum=X+10;
+	printf("\nUSING #UNDEF and again defining X as 20");
+	#undef X
+	#define X 20
+	sum=X+10;
+	printf("\nX = %d AND SUM = %d",X,sum);
+	return 0;
+}
+
+
+15Biii. Write a c program to implement pre-processor undef
+Note: define the macro as GRIET and assign value to 500.
+using undef macro, remove the value and redefine it to 100
+
+Input Format: no input
+Output Format :redefined value of macro using undef as given in the test case.
+
+Test Cases :
+------------------------
+case = t1
+input=                                                                               
+output=value of GRIET=100  
+
+PROGRAM:
+-----------------------------------
+#include <stdio.h>
+#define GRIET 500
+#undef GRIET
+#define GRIET 100
+int main()
+{
+printf("value of GRIET=%d",GRIET);
+return 0;
+}
+
+15Biv. Write a c program to implement pre-processor ifndef
+Note: use macro name as GRIET and assign the value 800
+
+Input Format: no input
+Output Format :print the macro value if it is not defined 
+
+Test Cases :
+----------------------
+case = t1
+input= no input                                                                               
+output=
+value of GRIET=800
+
+PROGRAM:
+------------------------
+#include<stdio.h>
+#ifndef GRIET
+#define GRIET 800
+#else
+#undef GRIET
+#define GRIET 800
+#endif
+int main()
+{
+printf("value of GRIET=%d",GRIET);
+return(0);
+}
+
+15c. Write a c program to create a user defined header file to find sum, product and greatest of
+two numbers 
+Input Format: Read two integer numbers
+Output Format :Sum, Product and Maximum of 2 numbers displayed in separate lines.
+Note: Students need to include the myheader.h header file in their program.
+
+Test Cases :
+-----------------------------
+input= 3 5                                                                              
+output=
+Sum of 3 and 5 = 8
+Product of 3 and 5 = 15
+Maximum of 3 and 5 = 5
+
+PROGRAM:
+------------------------
+#include<stdio.h>
+#include "myheader.h"
+/*int sum(int,int);
+int product(int,int);
+int FindMax(int,int);*/
+int main()
+{
+int a,b,res;
+//printf("\n Enter a ,b :");
+scanf("%d%d",&a,&b);
+printf("Sum of %d and %d = %d\n",a,b,sum(a,b));
+printf("Product of %d and %d = %d\n",a,b,product(a,b));
+res=FindMax(a,b);
+printf("Maximum of %d and %d = %d",a,b,res);
+}
+
+
+
+
+
+
+
 
