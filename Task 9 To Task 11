@@ -1,1 +1,579 @@
+TASK-9:
+------------------------
+9a. Write a C program to display binary equivalent of a given decimal number using functions
 
+Test cases:
+----------------------
+case=t1
+Input =34                                                                              
+output =Decimal Number=34 its Binary equivalent=100010 
+
+case=t2
+Input =213                                                                             
+output =Decimal Number=213 its Binary equivalent=11010101
+
+PROGRAM:
+---------------------
+#include <stdio.h>
+void dectobinary(int);
+int main() 
+{
+    
+   int number;
+    scanf("%d", &number);
+    dectobinary(number);
+    return 0;
+}
+void dectobinary(int n)
+{
+    int num2=n;
+    int i,j;
+    int a[32];
+    for(i=0; n>0; i++)
+    {
+        a[i] = n%2;
+        n = n/2;
+    }
+    
+    printf("Decimal Number=%d \n its Binary equivalent=",num2);
+    for(j = i - 1; j >= 0; j--)  
+    {
+        printf("%d", a[j]);
+    }
+    
+}
+
+9b. Write a C program to implement transpose of a matrix using functions.
+
+Test cases:
+---------------------------
+case=t1
+Input =2 2
+1 2 6 5 
+output =
+Original Matrix                                                                
+   1  2                                                                        
+   6  5 
+  Transpose Matrix                                                                
+   1   6                                                                        
+   2   5  
+
+case=t2
+Input = 2 3                                                                             
+1 2 3 4 5 6  
+output =
+Original Matrix                                                                 
+   1   2   3                                                                    
+   4   5   6                                                                    
+Transpose Matrix                                                                
+   1   4                                                                        
+   2   5                                                                        
+   3   6  
+
+PROGRAM:
+--------------------------
+#include <stdio.h>
+void Display(int x[][5], int r, int c);
+void Transpose(int x[][5], int r, int c);
+int main()
+{
+    int a[5][5], r1, c1, i, j;
+    // fill in the misssing code from here
+    scanf("%d%d", &r1, &c1);
+    for (int i = 0; i < r1; i++)
+        for (int j = 0; j < c1; j++)
+            scanf("%d", &a[i][j]);
+            printf("Original Matrix");
+    Display(a, r1, c1);
+    Transpose(a, r1, c1);
+    return 0;
+}
+
+void Display(int x[][5], int r, int c)
+{
+    int i, j;
+    // fill in the misssing code from here
+    for (i = 0; i < r; i++)
+    {
+        for (j = 0; j < c; j++)
+        {
+            printf(" %d ", x[i][j]);
+        }
+        printf("\n");
+    }
+}
+
+void Transpose(int x[][5], int r, int c)
+{
+    int b[5][5], i, j;
+    // fill in the misssing code from here
+    for (int i = 0; i < r; i++)
+    {
+        for (int j = 0; j < c; j++)
+        {
+            b[j][i] = x[i][j];
+        }
+    }
+    printf("Transpose Matrix");
+    Display(b, c, r);
+}
+
+
+9c. Write a C program using functions that compares two strings to see whether they are identical or not. 
+The function returns 1 if they are identical, 0 otherwise.
+Test cases:
+---------------------------
+case=t1
+input=clanguage clanguage
+output=
+Strings s1 = clanguage and s2 = clanguage are identical
+   
+case=t2
+Input = java python
+output = Strings s1 = java and s2 = python are not identical
+
+PROGRAM:
+--------------------------
+#include<stdio.h>
+int StringCompare(char *s1,char *s2);
+int main()
+{
+int x;
+char str1[20],str2[20];
+printf("Enter String 1: ");
+scanf("%s",str1);
+printf("Enter String 2: ");
+scanf("%s",str2);
+x=StringCompare(str1,str2);
+if(x==1)
+printf("\n Strings s1 = %s and s2 = %s are identical\n",str1,str2);
+else
+printf("\n Strings s1 = %s and s2 = %s are not identical\n",str1,str2);
+return 0;
+}
+// function for comparing strings
+int StringCompare(char *s1,char *s2)
+{
+int i;
+for(i=0;*(s1+i)==*(s2+i) && *(s1+i)!='\0' && *(s2+i)!='\0';i++);
+if(*(s1+i)=='\0'&& *(s2+i)=='\0')
+return 1;
+else
+return 0;
+}
+
+
+TASK-10:
+----------------------
+10a. Write a C program to implement factorial of a given integer using recursive and nonrecursive functions.
+
+Test case example:
+-------------------------
+case = t1
+input = 5
+output = Factorial of 5 Using Recursive Function is : 120
+output = Factorial of 5 Using Non-Recursive Function is : 120
+
+case = t2
+input = 6
+output = Factorial of 6 Using Recursive Function is : 720
+output = Factorial of 6 Using Non-Recursive Function is : 720
+
+case = t3
+input = 1
+output = Factorial of 1 Using Recursive Function is: 1
+output = Factorial of 1 Using Non-Recursive Function is: 1
+
+case = t4
+input = 0
+output = Factorial of 0 is 1
+
+case = t5
+input = -2
+output = Invalid Input
+
+PROGRAM:
+------------------------
+#include<stdio.h>
+long int rec_fact(int n);
+long int iter_fact(int n);
+int main( )
+{
+int n;
+//printf("\n Enter the number to find factorial for :");
+scanf("%d",&n);
+if(n<0)
+printf("\n Invalid Input\n");
+else if(n==0)
+printf("\n Factorial of 0 is 1\n");
+else
+{
+printf("\n Factorial of %d Using Recursive Function is : %ld \n",n,rec_fact(n));
+printf("\n Factorial of %d Using Non-Recursive Function is : %ld\n",n,iter_fact(n));
+}
+}
+/* Recursive Function*/
+long int rec_fact(int n)
+{
+long int fact=0;
+if(n==1)
+return 1;
+else
+return(n * rec_fact(n-1));  
+}
+/* Non-Recursive Function*/
+long int iter_fact(int n)
+{
+long int fact= 1;
+int i;
+for(i = 1; i<= n; i++)
+fact *= i;
+return(fact);
+}
+
+10b. Write a C program to implement GCD of a given 2 integers using recursive and nonrecursive functions.
+
+Test case example:
+---------------------------
+case = t1
+input = 5 2
+output = GCD of 5 and 2 Using Recursive Function is : 1
+output = GCD of 5 and 2 Using Non-Recursive Function is : 1
+
+case = t2
+input = 6 4
+output = GCD of 6 and 4 Using Recursive Function is : 2
+output = GCD of 6 and 4 Using Non-Recursive Function is : 2
+
+case = t3
+input = 10 25
+output = GCD of 10 and 25 Using Recursive Function is : 5
+output = GCD of 10 and 25 Using Non-Recursive Function is : 5
+
+PROGRAM:
+----------------------------
+#include<stdio.h>
+int rec_gcd(int n1, int n2);
+int iter_gcd(int n1,int n2);
+int main(void)
+{
+int a,b;
+//printf("\n Enter the two numbers whose GCD is to be found ");
+scanf("%d %d",&a,&b);
+printf("GCD of %d and %d Using Recursive Function is : %d \n",a,b,rec_gcd(a,b));
+printf("GCD of %d and %d Using Non-Recursive Function is : %d \n",a,b,iter_gcd(a,b));
+return(0);
+}
+/* Recursive Function*/
+int rec_gcd(int n1, int n2)
+{
+if(n2>n1)
+return  rec_gcd(n2,n1);
+if(n2==0)
+return n1;
+else
+return rec_gcd(n2,n1%n2);
+}
+/* Non-Recursive Function*/
+int iter_gcd(int n1,int n2)
+{
+int temp;
+while (n2!=0)
+{
+temp=n1%n2;
+n1=n2;
+n2=temp;
+}
+return(n1);
+}
+
+10c.Write a C program to print first ‘n’ terms of Fibonacci series using recursive and nonrecursive functions.
+
+Test case example:
+-----------------------
+case=t1
+input=5
+output=
+Fibonacci series of 5 Using Recursive Function is:0 1 1 2 3 
+Fibanacci series of 5 Using Non-Recursive Function is:0 1 1 2 3
+
+case=t2
+input=10
+output=
+Fibonacci series of 10 Using Recursive Function is:0 1 1 2 3 5 8 13 21 34 
+Fibanacci series of 10 Using Non-Recursive Function is:0 1 1 2 3 5 8 13 21 34
+
+case=t3
+input=-10
+output=Invalid input
+
+case=t4
+input=0
+output=input should be greater than or equal to 2
+output=Invalid Input
+
+PROGRAM:
+---------------------------
+#include <stdio.h>
+int rec_fib(int);
+void iter_fib(int);
+int main()
+{
+int n,i;
+scanf("%d",&n);
+if(n<0)
+printf("Invalid Input");
+else if(n==0 || n == 1)
+printf("input should be greater than or equal to 2\n");
+else
+{
+printf("Fibonacci series of %d Using Recursive Function is:",n);
+   for(i=0; i<n; i++)  
+{  
+  printf ("%d ", rec_fib(i));  
+} 
+printf("\nFibanacci series of %d Using Non-Recursive Function is:",n);
+  iter_fib(n);
+}
+}
+int rec_fib(int n)   
+{   
+    if(n==0)  
+{  
+return 0;  
+}  
+if ( n == 1)  
+{  
+return 1;  
+} 
+    return rec_fib(n-1) + rec_fib(n-2);     
+}      
+void iter_fib(int n)  
+{    
+ int n1=0,n2=1,n3,i,number;    
+ printf("%d %d",n1,n2);//printing 0 and 1    
+ for(i=2;i<n;++i)//loop starts from 2 because 0 and 1 are already printed    
+ {    
+  n3=n1+n2;    
+  printf(" %d",n3);    
+  n1=n2;    
+  n2=n3;    
+ }  
+ }   
+
+TASK-11:
+--------------------------
+11ai.  Write a c program perform string reverse operation without using inbuilt function.
+
+TEST CASES:
+----------------------------
+case=t1
+input=griet
+output=teirg
+
+case=t2
+input = java
+output = avaj
+
+PROGRAM:
+-------------------------
+#include <stdio.h>
+#include <string.h>
+int main()
+{
+    char str[20];
+    scanf("%[^\n]",str);
+ int i,length;
+  for(length=0;str[length]!='\0';length++);
+  
+for (i = 0; i < length/2; i++)
+  {
+    char temp = str[i];
+    str[i] = str[length-i-1];
+    str[length-i-1] = temp;
+  }
+  printf("%s", str);   //output:teirg
+ return 0;
+}
+
+11aii. Write a c program to perform string concatenation using inbuilt function
+Test cases:
+------------------------
+case = t1
+input = Arsenal Invincibles
+output = After concatenation string s1 = Arsenal Invincibles s2 = Invincibles
+
+case = t2
+input=grietcpds.co.in /moodle
+output=After concatenation string s1 =grietcpds.co.in/moodle s2=/moodle
+
+PROGRAM:
+----------------------------
+#include <stdio.h>
+#include<string.h>
+int main()
+{
+char s1[20],s2[20];
+//printf("\n Enter two strings s1 and s2:");
+scanf("%s %s",s1,s2);
+strcat(strcat(s1 ," "),s2);
+printf("After concatenation string s1 = %s s2 = %s",s1,s2);
+return 0;
+}
+
+11aiii. Write a c program to perform string concatenation without using inbuilt function
+Test cases:
+---------------------------------------
+case = t1
+input = Arsenal Invincibles
+output = After concatenation string s1 = Arsenal Invincibles s2 = Invincibles
+
+case = t2
+input=grietcpds.co.in /moodle
+output=After concatenation string s1 =grietcpds.co.in/moodle s2=/moodle
+
+PROGRAM:
+-----------------------
+#include<stdio.h>
+
+int main()
+{
+  char str1[25],str2[25];
+  int i=0,j=0;
+  //printf("\nEnter First String:");
+ scanf("%s %s",str1,str2);
+  for(i=0;str1[i]!='\0';i++);
+  str1[i]=' ';
+  for(i=i+1,j=0;str2[j]!='\0';i++,j++)
+  {
+    str1[i]=str2[j];
+  }
+  str1[i]='\0';
+  printf("After concatenation string s1 = %s s2 = %s",str1,str2);
+}
+
+11b. Write a c program to check if given string is palindrome or not
+Test cases:
+-----------------------
+case = t1
+input = madam
+output = The entered string is palindrome
+
+case = t2
+input=radar
+output=The entered string is palindrome
+
+case = t3
+input=level
+output=The entered string is palindrome
+
+case = t4
+input=college
+output=The entered string is not a palindrome
+
+PROGRAM:
+---------------------
+#include<stdio.h>
+#include<string.h>
+int main()
+{
+char str[50],str1[50];
+int x,i,j=0;
+printf("\n enter the string :");
+scanf("%s",str);
+for(i=strlen(str)-1;i>=0;i--,j++)
+{
+str1[j]=str[i];
+}
+str1[j]='\0';
+x=strcmp(str,str1);
+if(x==0)
+printf("The entered string is palindrome");
+else
+printf(" The entered string is not a palindrome");
+return 0;
+}
+
+11c.Write a C program to sort the ‘n’ strings in the alphabetical order.
+
+Test case:
+-----------------------
+case = t1
+input= 3
+never
+give
+up
+output =
+THE ORIGINAL UNSORTED STRINGS ARE
+1. never
+2. give
+3. up
+THE SORTED STRINGS ARE:
+1. give
+2. never
+3. up
+
+case = t2
+input= 5
+hi
+guys
+how
+are
+you
+output =
+THE ORIGINAL UNSORTED STRINGS ARE:
+1. hi
+2. guys
+3. how
+4. are
+5. you
+THE SORTED STRINGS ARE:
+1. are
+2. guys
+3. hi
+4. how
+5. you
+
+PROGRAM:
+-----------------------
+#include<stdio.h>
+#include<string.h>
+int main()
+{
+char str[20][20],temp[20];
+int i,j,n;
+//printf("\n Sorting a list of strings:\n");
+//printf("\n Enter number of strings:");
+scanf("%d",&n);
+for(i=0;i<n;i++)
+{
+//printf("\n Enter %d string : ",i+1);
+scanf("%s",str[i]);
+}
+puts("\n THE ORIGINAL UNSORTED STRINGS ARE");
+for(j=0;j<n;j++)
+{
+printf("%d. ",j+1);
+puts(str[j]);
+}
+for(i=0;i<n;i++) //method to sort strings
+{
+for(j=i;j<n;j++)
+{
+if((strcmp(str[i],str[j]))>0)
+{
+strcpy(temp,str[i]);
+strcpy(str[i],str[j]);
+strcpy(str[j],temp);
+}
+}
+}
+puts("\n THE SORTED STRINGS ARE:");
+for(i=0;i<n;i++)
+{
+printf("%d. ",i+1);
+puts(str[i]);
+}
+printf("\n");
+return 0;
+}
