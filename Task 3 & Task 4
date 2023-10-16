@@ -1,1 +1,317 @@
+TASK-3:
+-------------------
+3a. Write a C program to add two numbers without using arithmetic operators in C. 
+
+Test Cases:
+-------------------
+cases:
+Input= 4 5
+Output=
+
+sum=9
+
+Case=t2
+Input= 2 3
+Output=
+
+sum=5
+
+Case=t3
+Input= 4 6
+Output=
+
+sum=10
+
+PROGRAM:
+------------------------
+#include<stdio.h>
+int main()
+{
+int x,y,carry;
+printf("Enter two numbers:");
+scanf("%d%d",&x,&y);
+while(y!=0)
+{
+   carry= x & y;
+   x= x ^ y;
+   y= carry << 1;
+}
+printf("sum=%d",x);
+return 0;
+}
+
+3b. Write a C program to determine whether a number is a power of 2 or not using bitwise operator and ternary operator. 
+
+Test cases:
+------------------------
+Case=t1
+Input=256
+Output=
+256 is power of 2 
+
+Case=t2
+Input=9
+Output=
+9 is not a power of 2
+
+Case=t3
+Input=16
+Output=
+16 is power of 2
+
+Case=t4
+Input=21
+Output=
+21 is not a power of 2
+
+PROGRAM:
+-----------------------------
+#include<stdio.h> 
+#include<math.h> 
+int main() 
+{ int num; 
+  printf("Enter the number:");
+ scanf("%d",&num); 
+//condition to check whether number is power of two or not  
+(num!=0 && ((num &(num - 1)) == 0))?printf("%d is power of 2",num):printf("%d is not a power of 2", num);     
+return 0; 
+}
+
+3c. Write a C program to check whether a number is even or odd using bitwise operator and ternary
+Test Cases:
+----------------------
+Case=t1
+Input=4
+Output=
+4 is even number
+
+Case=t2
+Input=9
+Output=
+9 is odd number
+
+Case=t3
+Input=100
+Output=
+100 is even number
+
+Case=t4
+Input=11
+Output=
+11 is odd number
+
+Case=t5
+Input=-5
+Output=
+-5 is odd number
+
+PROGRAM:
+---------------------------
+#include<stdio.h> 
+int main() 
+{ 
+    int num; 
+    printf("Enter a integer number:"); 
+    scanf("%d",&num); 
+    /*Ternary and Bitwise Operators */ 
+    (num%2==0 && (num & 1)==0)?printf("%d is even number",num):printf("%d is odd number",num); 
+    return 0; 
+    
+}
+
+TASK-4:
+------------------------
+4a. Write a C program to input electricity unit charges and calculate total electricity bill according to the given condition: 
+Write a C program to input electricity unit charges and calculate total electricity bill
+according to the given condition:
+For first 50 units Rs. 0.50/unit
+For next 100 units Rs. 0.75/unit
+For next 100 units Rs. 1.20/unit
+For unit above 250 Rs. 1.50/unit
+An additional surcharge of 20% is added to the bill
+
+Test Cases:
+------------------------------
+case=t1
+input=50
+output=
+Electricity Bill = Rs.30.00
+
+case=t2
+input=100
+output=
+Electricity Bill = Rs.75.00
+
+case=t3
+input=220
+output=
+Electricity Bill = Rs.220.80
+
+
+case=t4
+input=300
+output=
+Electricity Bill = Rs.354.00
+
+PROGRAM:
+---------------------------
+#include <stdio.h>
+int main()
+{
+int unit;
+float amt, total_amt, sur_charge;
+scanf("%d", &unit);
+if(unit <= 50)
+{
+amt = unit * 0.50;
+}
+else if(unit <= 150)
+{
+amt = 25 + ((unit-50) * 0.75);
+}
+else if(unit <= 250)
+{
+amt = 100 + ((unit-150) * 1.20);
+}
+else
+{
+
+amt = 220 + ((unit-250) * 1.50);
+}
+sur_charge = amt * 0.20;
+total_amt = amt + sur_charge;
+printf("Electricity Bill = Rs.%.2f", total_amt);
+return 0;
+}
+
+4b.  Write a menu driven C program to implement a simple arithmetic calculator. 
+Test Cases:
+-------------------------------
+case =t1
+input=+
+7 10
+output=
+Addition: 7 + 10 = 17 
+
+case =t2
+input=-
+8 10
+output=
+Subtraction: 8 - 10 = -2 
+
+case = t3
+input=/ 
+4 2
+output=
+Division: 4 / 2 = 2 
+
+case = t4
+input=%
+10 15
+output=
+Remainder: 10 mod 15 = 10
+
+PROGRAM:
+-----------------------------
+#include<stdio.h>
+#include<stdlib.h>
+void main( ) 
+{ 
+int a,b,res;
+char ch;
+scanf("%c",&ch); 
+scanf("%d %d",&a,&b);  
+switch(ch) 
+{ 
+case '+': res=a+b;
+printf("Addition: %d + %d = %d ",a,b,res); 
+break; 
+case '-': res=a-b;
+printf("Subtraction: %d - %d = %d ",a,b,res); 
+break; 
+case '*': res=a*b;
+printf("Multiplication: %d * %d = %d ",a,b,res);
+break;
+case '/': res=a/b;
+printf("Division: %d / %d = %d ",a,b,res);
+break;
+case '%': res=a%b;
+printf("Remainder: %d mod %d = %d",a,b,res);
+break;
+default: printf("Invalid Choice ");
+break;
+}
+}
+
+4c.  Write a C program to display number of days in month using switch case (The input is month number 1 -12). 
+Test Cases:
+---------------------
+case=t1
+input=
+5
+output=
+May 31 days
+
+case=t2
+input=
+10
+output=
+October 31 days
+
+case=t3
+input=
+9
+output=
+September 30 days
+
+case=t4
+input=
+2
+output=
+February 28 days
+
+case=t5
+input=
+15
+output=
+Invalid Option
+
+PROGRAM:
+----------------------------
+#include<stdio.h>
+#include<stdlib.h>
+void main( ) 
+{ 
+int ch;
+scanf("%d",&ch); 
+switch(ch) 
+{ 
+case 1: printf("January 31 days");
+break;
+case 2: printf("February 28 days");
+break;
+case 3: printf("March 31 days");
+break;
+case 4: printf("April 30 days");
+break;
+case 5: printf("May 31 days");
+break;
+case 6: printf("June 30 days");
+break;
+case 7: printf("July 31 days");
+break;
+case 8: printf("August 31 days");
+break;
+case 9: printf("September 30 days");
+break;
+case 10: printf("October 31 days");
+break;
+case 11: printf("November 30 days");
+break;
+case 12: printf("December 31 days");
+break;
+default:printf("Invalid Option");
+break;
+}
+}
 
